@@ -1,16 +1,11 @@
-:root {
-  --green: #3fa34d;
-  --white: #fff;
-}
-
 * {
+  border: 0;
   margin: 0;
   padding: 0;
-  border: 0;
 }
 
 body {
-  font-family: 'Ubuntu', sans-serif;
-  width: 100vw;
+  font-family: Ubuntu, sans-serif;
   height: 100vh;
+  width: 100vw;
 }
