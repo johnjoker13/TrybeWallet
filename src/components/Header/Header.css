@@ -1,3 +1,31 @@
 .header__container {
+  align-items: center;
+  background-color: white;
+  border-bottom: 1px solid #cecece;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  color: rgb(66, 66, 66);
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header__img {
+  max-width: 3.5em;
+  width: 3.5em;
+}
+
+.header__info {
+  margin-right: 60px;
+}
+
+.header__info__item {
+  margin: 10px;
+}
+
+.header__info__item:nth-child( 1 ):before {
+  content: 'Email: ';
+}
+
+.header__info__item:nth-child( 2 ):before {
+  content: 'Despesa Total: R$ ';
 }

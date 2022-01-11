@@ -5,6 +5,7 @@ class Input extends Component {
   render() {
     const {
       labelId,
+      labelText,
       testId,
       inputType,
       inputPlaceHolder,
@@ -15,6 +16,7 @@ class Input extends Component {
     } = this.props;
     return (
       <label htmlFor={ labelId }>
+        { labelText }
         <input
           data-testid={ testId }
           type={ inputType }
@@ -31,6 +33,7 @@ class Input extends Component {
 
 Input.defaultProps = {
   labelId: '',
+  labelText: '',
   testId: '',
   inputType: '',
   inputPlaceHolder: '',
@@ -42,11 +45,12 @@ Input.defaultProps = {
 
 Input.propTypes = {
   labelId: PropTypes.string,
+  labelText: PropTypes.string,
   testId: PropTypes.string,
   inputType: PropTypes.string,
   inputPlaceHolder: PropTypes.string,
   inputName: PropTypes.string,
-  inputValue: PropTypes.string,
+  inputValue: PropTypes.number,
   onChange: PropTypes.func,
   className: PropTypes.string,
 };
