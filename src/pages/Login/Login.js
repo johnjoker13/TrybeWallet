@@ -46,8 +46,8 @@ class Login extends React.Component {
       <section className="login__container">
         <section className="login__form">
           <figure className="login__form__img__container">
-            <img src={ wallet } alt="wallet" className="login__form__img" />
             <figcaption className="login__form__img__caption">Trybe Wallet</figcaption>
+            <img src={ wallet } alt="wallet" className="login__form__img" />
           </figure>
           <section className="login__fields">
             <Input
