@@ -18,7 +18,7 @@ class Button extends Component {
 }
 
 Button.defaultProps = {
-  buttonDisabled: true,
+  buttonDisabled: false,
   onClick: () => {},
   btnText: '',
   btnClass: '',

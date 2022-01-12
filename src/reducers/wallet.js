@@ -2,6 +2,7 @@ import { FETCH_SUCCESS, OBJ_KEYS } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
+  expenses: [],
   quotation: [],
 };
 
