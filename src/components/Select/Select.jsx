@@ -23,7 +23,7 @@ class Select extends Component {
           value={ slcValue }
           onChange={ onChange }
         >
-          {optionsArray.filter((item) => item !== 'USDT').map((item) => (
+          {optionsArray.map((item) => (
             <option data-testid={ item } key={ item } value={ item }>{item}</option>
           ))}
         </select>
