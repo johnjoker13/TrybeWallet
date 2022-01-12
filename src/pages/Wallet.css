@@ -1,0 +1,23 @@
+.form__container {
+  background-color: #333;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  padding: 40px;
+}
+
+.form__item {
+  margin: 7px;
+}
+
+.form__button {
+  background-color: #3fa34d;
+  border: none;
+  color: white;
+}
+
+.form__button:hover {
+  background-color: green;
+  transition: 1s;
+}

@@ -23,8 +23,8 @@ class Select extends Component {
           value={ slcValue }
           onChange={ onChange }
         >
-          {optionsArray.map((item, index) => (
-            <option key={ index } value={ item }>{item}</option>
+          {optionsArray.filter((item) => item !== 'USDT').map((item) => (
+            <option data-testid={ item } key={ item } value={ item }>{item}</option>
           ))}
         </select>
       </label>
@@ -40,7 +40,7 @@ Select.defaultProps = {
   selectClass: '',
   slcValue: '',
   onChange: () => {},
-  optionsArray: '',
+  optionsArray: [],
 };
 
 Select.propTypes = {
@@ -51,7 +51,7 @@ Select.propTypes = {
   selectClass: PropTypes.string,
   slcValue: PropTypes.string,
   onChange: PropTypes.func,
-  optionsArray: PropTypes.arrayOf(PropTypes.element),
+  optionsArray: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default Select;

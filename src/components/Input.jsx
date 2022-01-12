@@ -50,7 +50,7 @@ Input.propTypes = {
   inputType: PropTypes.string,
   inputPlaceHolder: PropTypes.string,
   inputName: PropTypes.string,
-  inputValue: PropTypes.number,
+  inputValue: PropTypes.string,
   onChange: PropTypes.func,
   className: PropTypes.string,
 };
