@@ -12,9 +12,19 @@ class Header extends Component {
   sumAllExpenses = () => {
     const { getAllExpenses } = this.props;
     if (getAllExpenses.length !== 0) {
-      return getAllExpenses.map((x) => x.value * x.currentRate)
-        .reduce((acc, curr) => acc + curr);
+      const sumExpenses = getAllExpenses.reduce((acc, curr) => {
+        if (curr.currency
+          === curr.exchangeRates[curr.currency].code) {
+          acc
+            += (Number(curr.value) * Number(curr.exchangeRates[curr.currency].ask)
+            );
+          return acc;
+        }
+        return acc;
+      }, 0);
+      return sumExpenses;
     }
+    return 0;
   }
 
   render() {

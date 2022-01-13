@@ -33,7 +33,7 @@ class Wallet extends React.Component {
   onSubmitNewExpense = (event) => {
     event.preventDefault();
     const { addNewExpense, getQuotation, getCurrency } = this.props;
-    const { expenses: { currency }, expenses } = this.state;
+    const { expenses } = this.state;
     getCurrency();
     this.setState((prevState) => ({
       expenses: {
@@ -45,7 +45,7 @@ class Wallet extends React.Component {
         tag: 'Alimentação',
       },
     }));
-    addNewExpense({ ...expenses, currentRate: Number(getQuotation[0][currency].ask) });
+    addNewExpense({ ...expenses, exchangeRates: getQuotation[0] });
   };
 
   handleChange = ({ target }) => {
