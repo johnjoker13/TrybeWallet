@@ -5,6 +5,7 @@ export const LOGIN = 'LOGIN';
 export const FETCH_SUCCESS = 'FETCH__SUCCESS';
 export const FETCH_ERROR = 'FETCH_ERROR';
 export const OBJ_KEYS = 'OBJ_KEYS';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
 
 export const loginUser = (email) => ({
   type: LOGIN,
@@ -24,6 +25,11 @@ export const fetchError = (error) => ({
 export const getObjKeys = (keys) => ({
   type: OBJ_KEYS,
   keys,
+});
+
+export const addExpense = (payload) => ({
+  type: ADD_EXPENSE,
+  payload,
 });
 
 const thunkCurrency = () => async (dispatch) => {

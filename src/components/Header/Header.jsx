@@ -5,9 +5,21 @@ import wallet from '../../assets/wallet-icon.svg';
 import './Header.css';
 
 class Header extends Component {
+  componentDidMount() {
+    this.sumAllExpenses();
+  }
+
+  sumAllExpenses = () => {
+    const { getAllExpenses } = this.props;
+    if (getAllExpenses.length !== 0) {
+      return getAllExpenses.map((x) => x.value * x.currentRate)
+        .reduce((acc, curr) => acc + curr);
+    }
+  }
+
   render() {
-    const currentValue = 0;
     const { userMail } = this.props;
+    const total = this.sumAllExpenses();
     return (
       <header className="header__container">
         <figure className="header__img__container">
@@ -24,7 +36,7 @@ class Header extends Component {
             data-testid="total-field"
             className="header__info__item"
           >
-            {currentValue.toFixed(2)}
+            { total > 0 ? total.toFixed(2) : 0 }
           </span>
           <span
             data-testid="header-currency-field"
@@ -40,12 +52,17 @@ class Header extends Component {
 
 Header.defaultProps = {
   userMail: '',
+  getAllExpenses: [{}],
 };
 
 Header.propTypes = {
   userMail: PropTypes.string,
+  getAllExpenses: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
-const mapStateToProps = (state) => ({ userMail: state.user.email });
+const mapStateToProps = (state) => ({
+  userMail: state.user.email,
+  getAllExpenses: state.wallet.expenses,
+});
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, null)(Header);

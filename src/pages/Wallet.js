@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import thunkCurrency from '../actions/index';
+import thunkCurrency, { addExpense } from '../actions/index';
 import Form from '../components/Form/Form';
 import Header from '../components/Header/Header';
 import Input from '../components/Input';
@@ -16,22 +16,36 @@ class Wallet extends React.Component {
     this.state = {
       expenses: {
         id: 0,
-        value: '0',
+        value: 0,
         currency: '',
         method: 'Dinheiro',
         description: '',
-        tag: 'Alimentaçaõ',
+        tag: 'Alimentação',
       },
     };
   }
 
   componentDidMount() {
-    const { getCurrencies } = this.props;
-    getCurrencies();
+    const { getCurrency } = this.props;
+    getCurrency();
   }
 
-  onSubmit = (event) => {
+  onSubmitNewExpense = (event) => {
     event.preventDefault();
+    const { addNewExpense, getQuotation, getCurrency } = this.props;
+    const { expenses: { currency }, expenses } = this.state;
+    getCurrency();
+    this.setState((prevState) => ({
+      expenses: {
+        id: prevState.expenses.id + 1,
+        value: 0,
+        currency: '',
+        method: 'Dinheiro',
+        description: '',
+        tag: 'Alimentação',
+      },
+    }));
+    addNewExpense({ ...expenses, currentRate: Number(getQuotation[0][currency].ask) });
   };
 
   handleChange = ({ target }) => {
@@ -41,6 +55,8 @@ class Wallet extends React.Component {
     }));
   }
 
+  // const totalExpense = getExpenses.map((curr) => curr.currentRate[curr.currency].ask);
+
   render() {
     const { gatheredCurrencies } = this.props;
     const { expenses: {
@@ -49,11 +65,12 @@ class Wallet extends React.Component {
       currency,
       method,
       tag,
-    } } = this.state;
+    },
+    } = this.state;
     return (
       <div>
         <Header />
-        <Form formClassName="form__container" onSubmitForm={ () => {} }>
+        <Form formClassName="form__container" onSubmitForm={ this.onSubmitNewExpense }>
           <Input
             labelId="value-input"
             labelText="Valor: "
@@ -119,18 +136,27 @@ class Wallet extends React.Component {
   }
 }
 
+Wallet.defaultProps = {
+  addNewExpense: () => {},
+  getQuotation: [],
+};
+
 Wallet.propTypes = {
-  getCurrencies: PropTypes.func.isRequired,
+  getCurrency: PropTypes.func.isRequired,
   gatheredCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  addNewExpense: PropTypes.func,
+  getQuotation: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = (state) => ({
   gatheredCurrencies: state.wallet.currencies,
   getQuotation: state.wallet.quotation,
+  getAllExpenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCurrencies: () => dispatch(thunkCurrency()),
+  getCurrency: () => dispatch(thunkCurrency()),
+  addNewExpense: (e) => dispatch(addExpense(e)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);
