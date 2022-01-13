@@ -17,7 +17,7 @@ class Wallet extends React.Component {
       expenses: {
         id: 0,
         value: 0,
-        currency: '',
+        currency: 'USD',
         method: 'Dinheiro',
         description: '',
         tag: 'Alimentação',
@@ -58,7 +58,7 @@ class Wallet extends React.Component {
   // const totalExpense = getExpenses.map((curr) => curr.currentRate[curr.currency].ask);
 
   render() {
-    const { gatheredCurrencies } = this.props;
+    const { allCurrencies } = this.props;
     const { expenses: {
       value,
       description,
@@ -87,10 +87,11 @@ class Wallet extends React.Component {
             selectText="Moeda: "
             selectName="currency"
             selectTestId="currency-input"
+            selectId="currency-input"
             selectClass="form__item"
             slcValue={ currency }
             onChange={ this.handleChange }
-            optionsArray={ gatheredCurrencies }
+            optionsArray={ allCurrencies }
           />
 
           <Select
@@ -98,6 +99,7 @@ class Wallet extends React.Component {
             selectText="Método de pagamento: "
             selectName="method"
             selectTestId="method-input"
+            selectId="method-input"
             selectClass="form__item"
             slcValue={ method }
             onChange={ this.handleChange }
@@ -109,6 +111,7 @@ class Wallet extends React.Component {
             selectText="Categoria: "
             selectName="tag"
             selectTestId="tag-input"
+            selectId="tag-input"
             selectClass="form__item"
             slcValue={ tag }
             onChange={ this.handleChange }
@@ -142,14 +145,14 @@ Wallet.defaultProps = {
 };
 
 Wallet.propTypes = {
-  getCurrency: PropTypes.func.isRequired,
-  gatheredCurrencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  getCurrency: PropTypes.func,
   addNewExpense: PropTypes.func,
+  allCurrencies: PropTypes.arrayOf(PropTypes.object),
   getQuotation: PropTypes.arrayOf(PropTypes.object),
-};
+}.isRequired;
 
 const mapStateToProps = (state) => ({
-  gatheredCurrencies: state.wallet.currencies,
+  allCurrencies: state.wallet.currencies,
   getQuotation: state.wallet.quotation,
   getAllExpenses: state.wallet.expenses,
 });

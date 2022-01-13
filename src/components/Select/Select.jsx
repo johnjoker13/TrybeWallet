@@ -8,6 +8,7 @@ class Select extends Component {
       selectText,
       selectName,
       selectTestId,
+      selectId,
       selectClass,
       slcValue,
       onChange,
@@ -19,12 +20,19 @@ class Select extends Component {
         <select
           name={ selectName }
           data-testid={ selectTestId }
+          id={ selectId }
           className={ selectClass }
           value={ slcValue }
           onChange={ onChange }
         >
-          {optionsArray.map((item) => (
-            <option data-testid={ item } key={ item } value={ item }>{item}</option>
+          { optionsArray.length !== 0 && optionsArray.map((code) => (
+            <option
+              key={ `currency-${code}` }
+              value={ code }
+              data-testid={ code }
+            >
+              {code}
+            </option>
           ))}
         </select>
       </label>
@@ -37,6 +45,7 @@ Select.defaultProps = {
   selectText: '',
   selectName: '',
   selectTestId: '',
+  selectId: '',
   selectClass: '',
   slcValue: '',
   onChange: () => {},
@@ -48,6 +57,7 @@ Select.propTypes = {
   selectText: PropTypes.string,
   selectName: PropTypes.string,
   selectTestId: PropTypes.string,
+  selectId: PropTypes.string,
   selectClass: PropTypes.string,
   slcValue: PropTypes.string,
   onChange: PropTypes.func,

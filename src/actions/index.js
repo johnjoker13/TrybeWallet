@@ -37,7 +37,7 @@ const thunkCurrency = () => async (dispatch) => {
     const response = await fetchApi();
     const data = await response;
     dispatch(fetchSuccess(data));
-    dispatch(getObjKeys(Object.keys(data).filter((x) => x !== 'USDT' && x !== 'DOGE')));
+    dispatch(getObjKeys(Object.keys(data).filter((x) => x !== 'USDT')));
   } catch (error) {
     dispatch(fetchError(error));
   }
