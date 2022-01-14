@@ -9,6 +9,7 @@ import Button from '../components/Button';
 import Select from '../components/Select/Select';
 import { paymentMethod, tagType } from '../data/data';
 import './Wallet.css';
+import Table from '../components/Table/Table';
 
 class Wallet extends React.Component {
   constructor() {
@@ -134,6 +135,7 @@ class Wallet extends React.Component {
             typeBtn="submit"
           />
         </Form>
+        <Table />
       </div>
     );
   }
