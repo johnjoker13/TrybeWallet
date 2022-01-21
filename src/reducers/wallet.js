@@ -1,4 +1,10 @@
-import { FETCH_SUCCESS, OBJ_KEYS, ADD_EXPENSE, DELETE_EXPENSE } from '../actions';
+import {
+  FETCH_SUCCESS,
+  OBJ_KEYS,
+  ADD_EXPENSE,
+  DELETE_EXPENSE,
+  EDIT_EXPENSE,
+} from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -27,6 +33,11 @@ const walletReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: [...action.payload],
+    };
+  case EDIT_EXPENSE:
+    return {
+      ...state,
+      expenses: [...action.id],
     };
   default:
     return state;

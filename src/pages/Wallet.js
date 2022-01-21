@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import thunkCurrency, { addExpense } from '../actions/index';
+import thunkCurrency, { addExpense, editExpense } from '../actions/index';
 import Form from '../components/Form/Form';
 import Header from '../components/Header/Header';
 import Input from '../components/Input';
@@ -23,6 +23,7 @@ class Wallet extends React.Component {
         description: '',
         tag: 'Alimentação',
       },
+      shouldEdit: false,
     };
   }
 
@@ -34,7 +35,7 @@ class Wallet extends React.Component {
   onSubmitNewExpense = (event) => {
     event.preventDefault();
     const { addNewExpense, getQuotation, getCurrency } = this.props;
-    const { expenses } = this.state;
+    const { expenses, shouldEdit } = this.state;
     getCurrency();
     this.setState((prevState) => ({
       expenses: {
@@ -46,7 +47,12 @@ class Wallet extends React.Component {
         tag: 'Alimentação',
       },
     }));
-    addNewExpense({ ...expenses, exchangeRates: getQuotation[0] });
+    if (!shouldEdit) {
+      addNewExpense({ ...expenses, exchangeRates: getQuotation[0] });
+    } else {
+      this.setExpenseEdition(expenses.id);
+      this.setState({ shouldEdit: !shouldEdit });
+    }
   };
 
   handleChange = ({ target }) => {
@@ -56,7 +62,32 @@ class Wallet extends React.Component {
     }));
   }
 
-  // const totalExpense = getExpenses.map((curr) => curr.currentRate[curr.currency].ask);
+  editExpense = (id) => {
+    const { shouldEdit } = this.state;
+    const { getAllExpenses } = this.props;
+    const getExpense = getAllExpenses.find((x) => x.id === id);
+    this.setState({
+      expenses: {
+        id: getExpense.id,
+        value: getExpense.value,
+        currency: getExpense.currency,
+        method: getExpense.method,
+        description: getExpense.description,
+        tag: getExpense.tag,
+      },
+      shouldEdit: !shouldEdit,
+    });
+  }
+
+  setExpenseEdition = (id) => {
+    const { putExpense, getAllExpenses } = this.props;
+    const { expenses } = this.state;
+    const findById = getAllExpenses.findIndex((index) => index.id === id);
+    console.log(findById);
+    const { exchangeRates } = getAllExpenses[findById];
+    getAllExpenses[findById] = { ...expenses, exchangeRates };
+    putExpense(getAllExpenses);
+  }
 
   render() {
     const { allCurrencies } = this.props;
@@ -67,6 +98,7 @@ class Wallet extends React.Component {
       method,
       tag,
     },
+    shouldEdit,
     } = this.state;
     return (
       <div>
@@ -129,13 +161,11 @@ class Wallet extends React.Component {
             className="form__item"
             onChange={ this.handleChange }
           />
-          <Button
-            btnText="Adicionar Despesa"
-            btnClass="form__button"
-            typeBtn="submit"
-          />
+          {!shouldEdit
+            ? <Button btnText="Adicionar Despesa" typeBtn="submit" />
+            : <Button btnText="Editar despesa" typeBtn="submit" />}
         </Form>
-        <Table />
+        <Table handleEdit={ this.editExpense } />
       </div>
     );
   }
@@ -162,6 +192,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrency: () => dispatch(thunkCurrency()),
   addNewExpense: (e) => dispatch(addExpense(e)),
+  putExpense: (exp) => dispatch(editExpense(exp)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

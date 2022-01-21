@@ -7,6 +7,7 @@ export const FETCH_ERROR = 'FETCH_ERROR';
 export const OBJ_KEYS = 'OBJ_KEYS';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
 export const loginUser = (email) => ({
   type: LOGIN,
@@ -36,6 +37,11 @@ export const addExpense = (payload) => ({
 export const deleteExpense = (payload) => ({
   type: DELETE_EXPENSE,
   payload,
+});
+
+export const editExpense = (id) => ({
+  type: EDIT_EXPENSE,
+  id,
 });
 
 const thunkCurrency = () => async (dispatch) => {

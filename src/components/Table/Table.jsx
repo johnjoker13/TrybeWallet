@@ -12,7 +12,7 @@ class Table extends Component {
   }
 
   render() {
-    const { getExpenses } = this.props;
+    const { getExpenses, handleEdit } = this.props;
     return (
       <table className="table__container">
         <tr>
@@ -42,6 +42,12 @@ class Table extends Component {
             <td>Real</td>
             <td>
               <Button
+                btnId="edit-btn"
+                onClick={ () => handleEdit(expense.id) }
+                typeBtn="button"
+                btnText="Editar"
+              />
+              <Button
                 btnId="delete-btn"
                 onClick={ () => this.setExpense(expense.id) }
                 typeBtn="button"
@@ -57,6 +63,7 @@ class Table extends Component {
 
 Table.propTypes = {
   getExpenses: PropTypes.arrayOf(PropTypes.object),
+  handleEdit: PropTypes.func,
 }.isRequired;
 
 const mapDispatchToProps = (dispatch) => ({
