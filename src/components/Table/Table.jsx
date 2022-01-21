@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Table.css';
+import { deleteExpense } from '../../actions';
+import Button from '../Button';
 
 class Table extends Component {
+  setExpense = (id) => {
+    const { removeExpense, getExpenses } = this.props;
+    removeExpense(getExpenses.filter((item) => item.id !== id));
+  }
+
   render() {
     const { getExpenses } = this.props;
     return (
@@ -20,7 +27,7 @@ class Table extends Component {
           <th>Editar/Excluir</th>
         </tr>
 
-        {getExpenses.map((expense) => (
+        {getExpenses.length !== 0 && getExpenses.map((expense) => (
           <tr key={ expense.id }>
             <td>{expense.description}</td>
             <td>{expense.tag}</td>
@@ -33,6 +40,14 @@ class Table extends Component {
                 * expense.value).toFixed(2)}
             </td>
             <td>Real</td>
+            <td>
+              <Button
+                btnId="delete-btn"
+                onClick={ () => this.setExpense(expense.id) }
+                typeBtn="button"
+                btnText="Excluir"
+              />
+            </td>
           </tr>
         ))}
       </table>
@@ -44,8 +59,12 @@ Table.propTypes = {
   getExpenses: PropTypes.arrayOf(PropTypes.object),
 }.isRequired;
 
+const mapDispatchToProps = (dispatch) => ({
+  removeExpense: (expense) => dispatch(deleteExpense(expense)),
+});
+
 const mapStateToProps = (state) => ({
   getExpenses: state.wallet.expenses,
 });
 
-export default connect(mapStateToProps, null)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);

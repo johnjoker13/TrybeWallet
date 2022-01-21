@@ -6,6 +6,7 @@ export const FETCH_SUCCESS = 'FETCH__SUCCESS';
 export const FETCH_ERROR = 'FETCH_ERROR';
 export const OBJ_KEYS = 'OBJ_KEYS';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 export const loginUser = (email) => ({
   type: LOGIN,
@@ -29,6 +30,11 @@ export const getObjKeys = (keys) => ({
 
 export const addExpense = (payload) => ({
   type: ADD_EXPENSE,
+  payload,
+});
+
+export const deleteExpense = (payload) => ({
+  type: DELETE_EXPENSE,
   payload,
 });
 
