@@ -38,6 +38,10 @@
   max-width: 30%;
 }
 
+.login__form__img__caption__text {
+  color: grey;
+}
+
 .login__fields {
   align-items: center;
   display: flex;
@@ -54,10 +58,10 @@
 }
 
 .login__fields__button {
-  background: #3fa34d;
+  background: #124559;
   border: 1px solid white;
   color: white;
   margin: 5px;
   padding: 0.5em;
-  width: 56.5%;
+  width: 49%;
 }

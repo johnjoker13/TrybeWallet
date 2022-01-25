@@ -1,23 +1,34 @@
 .form__container {
-  background-color: #050302;
+  background-color: #124559;
+  box-sizing: border-box;
   color: white;
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   margin-top: 20px;
+  max-width: 100vw;
   padding: 40px;
 }
 
 .form__item {
-  margin: 7px;
+  background-color: white;
+  border-radius: 5px;
+  border-style: none;
+  color: #333;
+  font-weight: 700;
+  margin: 3px;
+  padding: 3px;
+  text-align: center;
 }
 
-.form__button {
-  background-color: #3fa34d;
+label {
+  font-weight: 700;
+}
+
+button {
+  background-color: white;
   border: none;
-  color: white;
-}
-
-.form__button:hover {
-  background-color: green;
-  transition: 1s;
+  border-radius: 5px;
+  color: #333;
+  margin-left: 5px;
 }

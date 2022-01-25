@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import wallet from '../../assets/wallet-icon.svg';
+import wallet from '../../assets/money-icon.png';
 import './Header.css';
 
 class Header extends Component {
@@ -46,7 +46,7 @@ class Header extends Component {
             data-testid="total-field"
             className="header__info__item"
           >
-            { total > 0 ? total.toFixed(2) : 0 }
+            { total > 0 ? total.toFixed(2) : '0.00' }
           </span>
           <span
             data-testid="header-currency-field"

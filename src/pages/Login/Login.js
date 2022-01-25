@@ -2,7 +2,7 @@ import React from 'react';
 import './Login.css';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import wallet from '../../assets/wallet-icon.svg';
+import wallet from '../../assets/wallet-blue.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { loginUser } from '../../actions';
@@ -46,7 +46,11 @@ class Login extends React.Component {
       <section className="login__container">
         <section className="login__form">
           <figure className="login__form__img__container">
-            <figcaption className="login__form__img__caption">Trybe Wallet</figcaption>
+            <figcaption className="login__form__img__caption">
+              Trybe
+              {' '}
+              <span className="login__form__img__caption__text">Wallet</span>
+            </figcaption>
             <img src={ wallet } alt="wallet" className="login__form__img" />
           </figure>
           <section className="login__fields">

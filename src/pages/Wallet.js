@@ -111,7 +111,7 @@ class Wallet extends React.Component {
             inputType="number"
             inputName="value"
             inputValue={ value }
-            className="form__item"
+            className="form__item form__input"
             onChange={ this.handleChange }
           />
 
@@ -158,7 +158,7 @@ class Wallet extends React.Component {
             inputType="text"
             inputName="description"
             inputValue={ description }
-            className="form__item"
+            className="form__item form__input"
             onChange={ this.handleChange }
           />
           {!shouldEdit

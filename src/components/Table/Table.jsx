@@ -45,12 +45,14 @@ class Table extends Component {
                 btnId="edit-btn"
                 onClick={ () => handleEdit(expense.id) }
                 typeBtn="button"
+                btnClass="edit-btn"
                 btnText="Editar"
               />
               <Button
                 btnId="delete-btn"
                 onClick={ () => this.setExpense(expense.id) }
                 typeBtn="button"
+                btnClass="delete-btn"
                 btnText="Excluir"
               />
             </td>
