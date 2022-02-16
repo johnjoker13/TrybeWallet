@@ -83,7 +83,6 @@ class Wallet extends React.Component {
     const { putExpense, getAllExpenses } = this.props;
     const { expenses } = this.state;
     const findById = getAllExpenses.findIndex((index) => index.id === id);
-    console.log(findById);
     const { exchangeRates } = getAllExpenses[findById];
     getAllExpenses[findById] = { ...expenses, exchangeRates };
     putExpense(getAllExpenses);
