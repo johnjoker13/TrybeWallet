@@ -1,5 +1,7 @@
 # TrybeWallet
 
+![Home](/assets/homepage.png)
+
 # Contexto
 
 Este projeto trata-se de um gerenciador de despesas que cria, edita, exclui e apresenta os gastos do usuário.
@@ -33,6 +35,9 @@ npm install
   cd src && npm start
   ```
  * Login
+
+  ![Tela de Login](/assets/login.png)
+
    ```
    email: 'alguem@email.com'
    password: '0123456'
